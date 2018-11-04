@@ -1,4 +1,5 @@
 #include "options.h"
+#include "func.h"
 #include "getopt.h"
 
 #define ARG_DEFAULT_SHOWHELP	FALSE
@@ -16,16 +17,27 @@ BOOL ParseArguments(int argc, char* argv[], Options* options)
 	int option;
 	while ((option = getopt(argc, argv, "p:s:d:h")) != -1)
 	{
+		BOOL parseResult;
+		int num;
 		switch (option)
 		{
 		case 'p':
-			options->pixels = atoi(optarg);
+			parseResult = ParseInt(optarg, &num);
+			if (!parseResult)
+				return FALSE;
+			options->pixels = num;
 			break;
 		case 's':
-			options->step = atoi(optarg);
+			parseResult = ParseInt(optarg, &num);
+			if (!parseResult)
+				return FALSE;
+			options->step = num;
 			break;
 		case 'd':
-			options->delay = atoi(optarg);
+			parseResult = ParseInt(optarg, &num);
+			if (!parseResult)
+				return FALSE;
+			options->delay = num;
 			break;
 		case 'h':
 			options->showHelp = TRUE;

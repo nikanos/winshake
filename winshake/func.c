@@ -18,3 +18,21 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
 	}
 	return TRUE;
 }
+
+BOOL ParseInt(const char* str, int* pNum)
+{
+	if (str == NULL)
+		return FALSE;
+
+	char* endPtr;
+	long result = strtol(str, &endPtr, 10);
+	if (str == endPtr)
+		return FALSE;
+
+	if (result<INT_MIN || result>INT_MAX)
+		return FALSE;
+
+	if (pNum != NULL)
+		*pNum = (int)result;
+	return TRUE;
+}

@@ -15,6 +15,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
 			if (options->delay > 0)
 				Sleep(options->delay);
 		}
+		MoveWindow(hwnd, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, TRUE);//we restore to saved position
 	}
 	return TRUE;
 }

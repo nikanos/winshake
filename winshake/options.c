@@ -25,17 +25,23 @@ BOOL ParseArguments(int argc, char* argv[], Options* options)
 			parseResult = ParseInt(optarg, &num);
 			if (!parseResult)
 				return FALSE;
+			if (num <= 0)
+				return FALSE;
 			options->pixels = num;
 			break;
 		case 's':
 			parseResult = ParseInt(optarg, &num);
 			if (!parseResult)
 				return FALSE;
+			if (num <= 0)
+				return FALSE;
 			options->step = num;
 			break;
 		case 'd':
 			parseResult = ParseInt(optarg, &num);
 			if (!parseResult)
+				return FALSE;
+			if (num < 0)/*Could be zero*/
 				return FALSE;
 			options->delay = num;
 			break;
